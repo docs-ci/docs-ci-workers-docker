@@ -4,6 +4,8 @@ LABEL MAINTAINER GCM
 ENV SUMMARY="Rubin Observatory base CentOS 8 image for Jenkins workers" \
     DESCRIPTION="This is the image to use for CentOS8 Jenkinssw workers"
 
+ARG SWARM_VERSION=3.9
+
 LABEL name="gcomoretto/centos8-worker:0.1.2" \
       version="0.1" \
       summary="$SUMMARY" \
@@ -24,6 +26,6 @@ USER jenkins
 ADD --chown=jenkins:jenkins rootfs /
 WORKDIR ${JENKINS_HOME}
 
-RUN curl -sSL -o ${SWARM_HOME}/swarm-client.jar https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/3.9/swarm-client-3.9.jar
+RUN curl -sSL -o ${SWARM_HOME}/swarm-client.jar https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}.jar
 
 ENTRYPOINT "${SWARM_HOME}/swarm-client.sh"
