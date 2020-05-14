@@ -12,5 +12,4 @@ if [ -z $JENKINS_SWARM_EXECUTORS ]; then
     JENKINS_SWARM_EXECUTORS=1
 fi
 
-java -jar ${JENKINS_HOME}/centos8/swarm-client.jar -disableSslVerification -executors ${JENKINS_SWARM_EXECUTORS} -master ${JENKINS_MASTER_URL} -labels ${JENKINS_SWARM_LABEL} -labels ${HOSTNAME} -name ${HOSTNAME} $*
-
+java -jar ${SWARM_HOME}/swarm-client.jar -disableSslVerification -executors ${JENKINS_SWARM_EXECUTORS} -master ${JENKINS_MASTER_URL} -labels ${JENKINS_SWARM_LABEL} -labels ${HOSTNAME} -name ${HOSTNAME} $*
