@@ -17,12 +17,11 @@ RUN INSTALL_PKGS="git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" && \
     yum -y clean all --enablerepo='*'
 
 ENV JENKINS_HOME /var/jenkins_home
-ENV SWARM_HOME ${JENKINS_HOME}/centos8
+ENV SWARM_HOME /opt/swarm
 RUN useradd jenkins -u 1000 -d ${JENKINS_HOME}
 
 USER jenkins
 ADD --chown=jenkins:jenkins rootfs /
-
 WORKDIR ${JENKINS_HOME}
 
 RUN curl -sSL -o ${SWARM_HOME}/swarm-client.jar https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/3.9/swarm-client-3.9.jar
