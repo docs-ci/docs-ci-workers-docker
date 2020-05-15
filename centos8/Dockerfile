@@ -4,7 +4,7 @@ LABEL MAINTAINER GCM
 ENV SUMMARY="Rubin Observatory base CentOS 8 image for Jenkins workers" \
     DESCRIPTION="This is the image to use for CentOS8 Jenkinssw workers"
 
-LABEL name="gcomoretto/centos8-worker:0.1.7" \
+LABEL name="gcomoretto/centos8-worker:0.1.8" \
       version="0.1" \
       summary="$SUMMARY" \
       description="$DESCRIPTION" \
