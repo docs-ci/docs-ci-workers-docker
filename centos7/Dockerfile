@@ -1,15 +1,14 @@
-FROM centos:8
+FROM centos:7
 LABEL MAINTAINER GCM
 
-ENV SUMMARY="Rubin Observatory base CentOS 8 image for Jenkins workers" \
+ENV SUMMARY="Rubin Observatory base CentOS 7 image for Jenkins workers" \
     DESCRIPTION="This is the image to use for CentOS8 Jenkinssw workers"
 
-LABEL name="gcomoretto/centos8-worker:0.1.11" \
-      version="0.1" \
+LABEL name="jenkins-centos7-worker" \
       summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="$DESCRIPTION" \
-      io.k8s.display-name="Rubin Observatory centos 8 container" 
+      io.k8s.display-name="Rubin Observatory centos 7 container" 
 
 RUN INSTALL_PKGS="git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" && \
     yum install -y --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
@@ -17,7 +16,7 @@ RUN INSTALL_PKGS="git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" && \
     yum -y clean all --enablerepo='*'
 
 ENV JENKINS_HOME /var/jenkins_home
-ENV SWARM_HOME /var/jenkins_swarm/centos8
+ENV SWARM_HOME /var/jenkins_swarm/centos7
 
 RUN useradd jenkins -u 1000 -d ${JENKINS_HOME}
 
