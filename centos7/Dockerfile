@@ -2,7 +2,7 @@ FROM centos:7
 LABEL MAINTAINER GCM
 
 ENV SUMMARY="Rubin Observatory base CentOS 7 image for Jenkins workers" \
-    DESCRIPTION="This is the image to use for CentOS8 Jenkinssw workers"
+    DESCRIPTION="This is the image to use for CentOS7 Jenkinssw workers"
 
 LABEL name="jenkins-centos7-worker" \
       summary="$SUMMARY" \
