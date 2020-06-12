@@ -27,4 +27,11 @@ WORKDIR ${JENKINS_HOME}
 
 RUN curl -sSL -o ${SWARM_HOME}/swarm-client.jar https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/3.9/swarm-client-3.9.jar
 
+RUN mkdir -p centos7 && \
+    git clone https://github.com/lsst/lsstsw && \
+    cd lsstsw && \
+    ./bin/deploy
+
+ENV LSSTSW_HOME=${JENKINS_HOME}/centos7/lsstsw
+
 ENTRYPOINT "${SWARM_HOME}/swarm-client.sh"
