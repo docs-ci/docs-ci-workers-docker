@@ -15,6 +15,14 @@ RUN INSTALL_PKGS="git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" && \
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'
 
+ARG MINICONDA_VERSION=4.7.12
+
+# Installing minicconda (this shall be made optional in lsstsw)
+RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh -o /tmp/miniconda.sh \
+    && bash /tmp/miniconda.sh -bfp /usr/local/ \
+    && rm -rf /tmp/miniconda.sh \
+    && conda clean --all --yes
+
 ENV JENKINS_HOME /var/jenkins_home
 ENV SWARM_HOME /var/jenkins_swarm/centos7
 
@@ -27,11 +35,5 @@ WORKDIR ${JENKINS_HOME}
 
 RUN curl -sSL -o ${SWARM_HOME}/swarm-client.jar https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/3.9/swarm-client-3.9.jar
 
-RUN mkdir -p centos7 && \
-    git clone https://github.com/lsst/lsstsw && \
-    cd lsstsw && \
-    ./bin/deploy
-
-ENV LSSTSW_HOME=${JENKINS_HOME}/centos7/lsstsw
-
+# swarm-client.sh shall also deploy lsstsw
 ENTRYPOINT "${SWARM_HOME}/swarm-client.sh"
