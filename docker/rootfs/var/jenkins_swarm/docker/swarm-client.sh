@@ -6,7 +6,7 @@ if [ -z $JENKINS_MASTER_URL ]; then
 fi
 
 if [ -z $JENKINS_SWARM_LABEL ]; then
-    JENKINS_SWARM_LABEL=centos7
+    JENKINS_SWARM_LABEL=docker
 fi
 
 if [ -z $JENKINS_SWARM_NAME ]; then

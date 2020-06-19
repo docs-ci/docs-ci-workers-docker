@@ -10,7 +10,7 @@ LABEL name="jenkins-centos7-worker" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Rubin Observatory centos 7 container" 
 
-RUN INSTALL_PKGS="git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" && \
+RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64" && \
     yum install -y --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'

@@ -1,23 +1,26 @@
-FROM centos:8
+FROM centos:7
 LABEL MAINTAINER GCM
 
-ENV SUMMARY="Rubin Observatory base CentOS 8 image for Jenkins workers" \
-    DESCRIPTION="This is the image to use for CentOS8 Jenkinssw workers"
+ENV SUMMARY="Rubin Observatorydocker image for docker builds Jenkins workers" \
+    DESCRIPTION="This is the image to build docker images with docs-ci Jenkins"
 
-LABEL name="gcomoretto/centos8-worker:0.1.11" \
-      version="0.1" \
+LABEL name="docker-worker" \
       summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Rubin Observatory centos 8 container" 
 
-RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64" && \
+# adding repository to enable docker installation
+RUN yum install -y yum-utils && \
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+RUN INSTALL_PKGS="git patch diffutils wget which docker-ce docker-ce-cli containerd.io" && \
     yum install -y --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'
 
 ENV JENKINS_HOME /var/jenkins_home
-ENV SWARM_HOME /var/jenkins_swarm/centos8
+ENV SWARM_HOME /var/jenkins_swarm/docker
 
 RUN useradd jenkins -u 1000 -d ${JENKINS_HOME}
 
