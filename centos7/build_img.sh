@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t docsci/centos7-worker:0.1.6 .
+docker build -t docsci/centos7-worker:0.1.7 .

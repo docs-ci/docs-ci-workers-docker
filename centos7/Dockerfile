@@ -15,12 +15,12 @@ RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'
 
-ARG MINICONDA_VERSION=4.7.12
-
-# Installing minicconda (this shall be made optional in lsstsw)
-RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh -o /tmp/miniconda.sh \
+# Installing minicconda
+RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
     && bash /tmp/miniconda.sh -bfp /usr/local/ \
     && rm -rf /tmp/miniconda.sh \
+    && conda install -y python=3 \
+    && conda update conda \
     && conda clean --all --yes
 
 ENV JENKINS_HOME /var/jenkins_home
