@@ -4,8 +4,7 @@ LABEL MAINTAINER GCM
 ENV SUMMARY="Rubin Observatory base CentOS 8 image for Jenkins workers" \
     DESCRIPTION="This is the image to use for CentOS8 Jenkinssw workers"
 
-LABEL name="gcomoretto/centos8-worker:0.1.11" \
-      version="0.1" \
+LABEL name="jenkins-centos8-worker" \
       summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="$DESCRIPTION" \
@@ -16,13 +15,28 @@ RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'
 
-ENV JENKINS_HOME /var/jenkins_home
-ENV SWARM_HOME /var/jenkins_swarm/centos8
+# Installing minicconda
+RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
+    && bash /tmp/miniconda.sh -bfp /usr/miniconda/ \
+    && rm -rf /tmp/miniconda.sh
+
+ENV PATH=/usr/miniconda/bin:${PATH}
+
+RUN conda install -y python=3 \
+    && conda update conda \
+    && conda clean --all --yes
+
+ARG WNAME="centos8"
+ENV JENKINS_HOME=/var/jenkins_home
+ENV SWARM_HOME=/var/jenkins_swarm/${WNAME}
 
 RUN useradd jenkins -u 1000 -d ${JENKINS_HOME}
 
 USER jenkins
 ADD --chown=jenkins:jenkins rootfs /
+
+# changing home folder to force conda to use a specific condarc file
+ENV HOME=${JENKINS_HOME}/${WNAME}
 
 WORKDIR ${JENKINS_HOME}
 
