@@ -19,6 +19,8 @@ fi
 
 JSW_HOME="/var/jenkins_home/${JENKINS_SWARM_NAME}"
 
+mkdir -p "${JSW_HOME}"
+
 java -jar ${SWARM_HOME}/swarm-client.jar \
   -deleteExistingClients \
   -disableSslVerification \
@@ -29,5 +31,5 @@ java -jar ${SWARM_HOME}/swarm-client.jar \
   -tunnel 127.0.0.1:50000 \
   -fsroot "${JSW_HOME}" \
   -username swarm \
-  -password ${SWARM_PWD} 2>&1 > ${SWARM_HOME}/swarm-client.log &
+  -password ${SWARM_PWD} 2>&1 > ${SWARM_HOME}/swarm-client.log
 

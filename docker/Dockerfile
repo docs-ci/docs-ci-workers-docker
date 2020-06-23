@@ -14,7 +14,7 @@ LABEL name="docker-worker" \
 RUN yum install -y yum-utils && \
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-RUN INSTALL_PKGS="git patch diffutils wget which docker-ce docker-ce-cli containerd.io" && \
+RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64 docker-ce docker-ce-cli containerd.io" && \
     yum install -y --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'
