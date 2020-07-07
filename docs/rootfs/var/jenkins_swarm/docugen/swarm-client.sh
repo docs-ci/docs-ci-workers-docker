@@ -16,6 +16,9 @@ if [ -z $JENKINS_SWARM_EXECUTORS ]; then
     JENKINS_SWARM_EXECUTORS=1
 fi
 
+# the Jenkins master may take some time before being up and running
+sleep 30
+
 java -jar ${SWARM_HOME}/swarm-client.jar \
   -deleteExistingClients \
   -disableSslVerification \
