@@ -10,7 +10,7 @@ LABEL name="docugen-worker" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Rubin Observatory docugen container"
 
-ARG DS_VER="1.2.rc13_0_ga622507"
+ARG DS_VER="1.2.rc18_0_g51f8aaa"
 
 # Installing required OS  Pakcages
 RUN INSTALL_PKGS="curl bzip2 git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" \
@@ -23,8 +23,9 @@ RUN INSTALL_PKGS="curl bzip2 git patch diffutils wget java-1.8.0-openjdk-devel.x
 RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
     && bash /tmp/miniconda.sh -bfp /usr/local/ \
     && rm -rf /tmp/miniconda.sh \
-    && conda install -y python=3 \
     && conda update conda \
+    && conda config --env --add channels conda-forge \
+    && conda install -y python=3 \
     && conda clean --all --yes
 
 # Add channels and install docsteady
