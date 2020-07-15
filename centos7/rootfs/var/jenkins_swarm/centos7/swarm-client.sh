@@ -19,6 +19,9 @@ fi
 
 JSW_HOME="/var/jenkins_home/${JENKINS_SWARM_NAME}"
 
+# the Jenkins master may take some time before being up and running
+sleep 30
+
 java -jar ${SWARM_HOME}/swarm-client.jar \
   -deleteExistingClients \
   -disableSslVerification \

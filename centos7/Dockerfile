@@ -10,16 +10,19 @@ LABEL name="jenkins-centos7-worker" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Rubin Observatory centos 7 container" 
 
-RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64" && \
+RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk" && \
     yum install -y --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'
 
 # Installing minicconda
 RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
-    && bash /tmp/miniconda.sh -bfp /usr/local/ \
-    && rm -rf /tmp/miniconda.sh \
-    && conda install -y python=3 \
+    && bash /tmp/miniconda.sh -bfp /usr/miniconda/ \
+    && rm -rf /tmp/miniconda.sh
+
+ENV PATH=/usr/miniconda/bin:${PATH}
+
+RUN conda install -y python=3 \
     && conda update conda \
     && conda clean --all --yes
 
