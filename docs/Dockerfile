@@ -10,7 +10,7 @@ LABEL name="docugen-worker" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Rubin Observatory docugen container"
 
-ARG DS_VER="1.2.rc18_0_g51f8aaa"
+ARG DS_VER="1.2.rc19_0_g455619e"
 
 # Installing required OS  Pakcages
 RUN INSTALL_PKGS="curl bzip2 git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" \
@@ -28,9 +28,7 @@ RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64
     && conda install -y python=3 \
     && conda clean --all --yes
 
-# Add channels and install docsteady
-RUN conda config --add channels gcomoretto --system \
-    && conda install docsteady=${DS_VER}
+RUN conda install docsteady=${DS_VER} -c gcomoretto
 
 # Configuring Jenkins worker's folders and user
 ENV JENKINS_HOME /var/jenkins_home
