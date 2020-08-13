@@ -10,7 +10,7 @@ LABEL name="docugen-worker" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Rubin Observatory docugen container"
 
-ARG DS_VER="1.2.rc21_0_g596756a"
+ARG DS_VER="1.2.rc22_0_g08fdcdb"
 
 # Installing required OS  Pakcages
 RUN INSTALL_PKGS="curl bzip2 git patch diffutils wget java-1.8.0-openjdk-devel.x86_64" \
