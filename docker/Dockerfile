@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:8
 LABEL MAINTAINER GCM
 
 ENV SUMMARY="Rubin Observatorydocker image for docker builds Jenkins workers" \
@@ -14,14 +14,14 @@ LABEL name="docker-worker" \
 RUN yum install -y yum-utils && \
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64 docker" && \
-    yum install -y --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
+RUN INSTALL_PKGS="git patch diffutils wget which java-1.8.0-openjdk-devel.x86_64 docker-ce docker-ce-cli" && \
+    yum install --nobest -y --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     rpm -V ${INSTALL_PKGS} && \
     yum -y clean all --enablerepo='*'
 
 #VOLUME [ "/sys/fs/cgroup" ]
 #VOLUME /var/lib/docker
-#
+
 #ADD ./wrapdocker /usr/local/bin/wrapdocker
 #RUN chmod +x /usr/local/bin/wrapdocker
 
@@ -29,6 +29,7 @@ ENV JENKINS_HOME /var/jenkins_home
 ENV SWARM_HOME /var/jenkins_swarm/docker
 
 RUN useradd jenkins -u 1000 -d ${JENKINS_HOME}
+#RUN usermod -aG dockerroot jenkins
 
 USER jenkins
 ADD --chown=jenkins:jenkins rootfs /
