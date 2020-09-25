@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# this client is running docker:
-/usr/bin/dockerd --host=tcp://localhost:2375 --mtu=1376 2>&1 > ${SWARM_HOME}/docker.log &
-
 # configuring and running the Jenkins Swarm Worker
 if [ -z $JENKINS_MASTER_URL ]; then
     JENKINS_MASTER_URL=https://lsst-docs-ci.ncsa.illinois.edu/jenkins/
