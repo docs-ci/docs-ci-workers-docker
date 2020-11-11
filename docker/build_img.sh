@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t docsci/docker-worker:0.2.9 .
+docker build -t docsci/docker-worker:0.2.10 .
