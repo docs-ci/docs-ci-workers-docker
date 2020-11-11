@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t docsci/docugen-worker:0.1.14 .
+docker build -t docsci/docugen-worker:0.1.15 .

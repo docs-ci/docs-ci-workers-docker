@@ -28,5 +28,5 @@ java -jar ${SWARM_HOME}/swarm-client.jar \
   -labels ${JENKINS_SWARM_LABEL} \
   -tunnel 127.0.0.1:50000 \
   -fsroot "/var/jenkins_home/${JENKINS_SWARM_NAME}" \
-  -username ${SWARM_USR} \
-  -password ${SWARM_PWD} 2>&1 > ${SWARM_HOME}/swarm-client.log
+  -username ${SWRB_USR} \
+  -password ${SWRB_PWD} 2>&1 > ${SWARM_HOME}/swarm-client.log
