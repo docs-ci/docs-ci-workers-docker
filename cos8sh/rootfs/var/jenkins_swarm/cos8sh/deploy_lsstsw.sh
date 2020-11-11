@@ -9,7 +9,7 @@ if [ -d "lsstsw" ]; then
   git pull
 else
   echo "Deploy lsst in ${JSW_HOME}"
-  git clone https://github.com/lsst/gcmshadow
+  git clone https://github.com/gcmshadow/lsstsw
   cd lsstsw
   git checkout u/gcm/shadow
   # when the node is first created, it has to deploy the infrastructure

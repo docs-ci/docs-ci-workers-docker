@@ -4,7 +4,7 @@ LABEL MAINTAINER GCM
 ENV SUMMARY="Rubin Observatory base CentOS 8 image for Jenkins workers using shadow organizaion" \
     DESCRIPTION="This is the image to use for CentOS8 Jenkinssw workers using shadow organization"
 
-LABEL name="jenkins-cos9sh-worker" \
+LABEL name="jenkins-cos8sh-worker" \
       summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="$DESCRIPTION" \
@@ -29,6 +29,7 @@ RUN conda install -y python=3 \
 ARG WNAME="cos8sh"
 ENV JENKINS_HOME=/var/jenkins_home
 ENV SWARM_HOME=/var/jenkins_swarm/${WNAME}
+ENV JSW_HOME=/var/jenkins_home/${WNAME}
 
 RUN useradd jenkins -u 1000 -d ${JENKINS_HOME}
 

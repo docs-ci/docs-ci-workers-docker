@@ -17,7 +17,7 @@ if [ -z $JENKINS_SWARM_EXECUTORS ]; then
     JENKINS_SWARM_EXECUTORS=1
 fi
 
-JSW_HOME="/var/jenkins_home/${JENKINS_SWARM_NAME}"
+#export JSW_HOME="/var/jenkins_home/${JENKINS_SWARM_NAME}"
 
 # make available lsstsw (if not deployed)
 #if [ ! -f "${${JSW_HOME}}.deployed" ]; then
