@@ -22,6 +22,7 @@ sleep 30
 java -jar ${SWARM_HOME}/swarm-client.jar \
   -deleteExistingClients \
   -disableSslVerification \
+  -disableClientsUniqueId \
   -executors ${JENKINS_SWARM_EXECUTORS} \
   -master ${JENKINS_MASTER_URL} \
   -name ${JENKINS_SWARM_NAME} \
@@ -29,4 +30,4 @@ java -jar ${SWARM_HOME}/swarm-client.jar \
   -tunnel 127.0.0.1:50000 \
   -fsroot "/var/jenkins_home/${JENKINS_SWARM_NAME}" \
   -username ${SWRB_USR} \
-  -password ${SWRB_PWD} 2>&1 > ${SWARM_HOME}/swarm-client.log
+  -password ${SWRB_KEY} 2>&1 > ${SWARM_HOME}/swarm-client.log
