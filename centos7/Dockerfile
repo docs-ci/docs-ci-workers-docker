@@ -26,17 +26,13 @@ RUN conda install -y python=3 \
     && conda update conda \
     && conda clean --all --yes
 
-ARG WNAME="centos7"
 ENV JENKINS_HOME=/var/jenkins_home
-ENV SWARM_HOME=/var/jenkins_swarm/${WNAME}
+ENV SWARM_HOME=/var/jenkins_swarm/centos7
 
 RUN useradd jenkins -u 1000 -d ${JENKINS_HOME}
 
 USER jenkins
 ADD --chown=jenkins:jenkins rootfs /
-
-# changing home folder to force conda to use a specific condarc file
-ENV HOME=${JENKINS_HOME}/${WNAME}
 
 WORKDIR ${JENKINS_HOME}
 
