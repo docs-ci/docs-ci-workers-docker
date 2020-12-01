@@ -17,7 +17,9 @@ if [ -z $JENKINS_SWARM_EXECUTORS ]; then
     JENKINS_SWARM_EXECUTORS=1
 fi
 
-JSW_HOME="/var/jenkins_home/${JENKINS_SWARM_NAME}"
+export HOME=${JENKINS_HOME}/${JENKINS_SWARM_NAME}
+
+mkdir -p ${HOME}
 
 # make available lsstsw 
 ${SWARM_HOME}/deploy_lsstsw.sh 2>&1 > ${SWARM_HOME}/deploy_lsstsw.log
@@ -34,7 +36,7 @@ java -jar ${SWARM_HOME}/swarm-client.jar \
   -name ${JENKINS_SWARM_NAME} \
   -labels ${JENKINS_SWARM_LABEL} \
   -tunnel 127.0.0.1:50000 \
-  -fsroot "${JSW_HOME}" \
+  -fsroot "${HOME}" \
   -username ${SWRB_USR} \
   -password ${SWRB_KEY} 2>&1 > ${SWARM_HOME}/swarm-client.log
 
